@@ -11,12 +11,6 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 public class MovieCatalogServiceApplication {
 
-    @Bean
-    @LoadBalanced //does service discovery in a load-balanced manner
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(MovieCatalogServiceApplication.class, args);
     }
