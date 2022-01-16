@@ -1,15 +1,15 @@
 package com.way2java.movieinfoservice.models;
 
-public class Movie {
+public class MovieInfo {
 
     private String movieId;
     private String title;
     private String overview;
 
-    public Movie() {
+    public MovieInfo() {
     }
 
-    public Movie(String movieId, String title, String overview) {
+    public MovieInfo(String movieId, String title, String overview) {
         this.movieId = movieId;
         this.title = title;
         this.overview = overview;

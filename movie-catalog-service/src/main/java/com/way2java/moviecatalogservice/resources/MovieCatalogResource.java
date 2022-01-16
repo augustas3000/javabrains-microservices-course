@@ -1,8 +1,9 @@
 package com.way2java.moviecatalogservice.resources;
 
 import com.way2java.moviecatalogservice.models.CatalogItem;
-import com.way2java.moviecatalogservice.models.Movie;
 import com.way2java.moviecatalogservice.models.UserRating;
+import com.way2java.moviecatalogservice.services.MovieInfoService;
+import com.way2java.moviecatalogservice.services.UserRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,21 +19,20 @@ import java.util.stream.Collectors;
 public class MovieCatalogResource {
 
     private final RestTemplate restTemplate;
+    private final MovieInfoService movieInfoService;
+    private final UserRatingService userRatingService;
 
     @Autowired
-    public MovieCatalogResource(RestTemplate restTemplate) {
+    public MovieCatalogResource(RestTemplate restTemplate, MovieInfoService movieInfoService, UserRatingService userRatingService) {
         this.restTemplate = restTemplate;
+        this.movieInfoService = movieInfoService;
+        this.userRatingService = userRatingService;
     }
 
     @GetMapping("/{userId}")
     public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
-
-        UserRating ratings = restTemplate.getForObject("http://ratings-data-service/ratingsdata/user/" + userId, UserRating.class);
-
-        return ratings.getRatings().stream().map(rating -> {
-            Movie movie = restTemplate.getForObject("http://movie-info-service/movies/" + rating.getMovieId(), Movie.class);
-            return new CatalogItem(movie.getTitle(), movie.getOverview(), rating.getRating());
-        }).collect(Collectors.toList());
+        UserRating ratings = userRatingService.getUserRatings(userId);
+        return ratings.getRatings().stream().map(movieInfoService::getCatalogItem).collect(Collectors.toList());
     }
 
 }

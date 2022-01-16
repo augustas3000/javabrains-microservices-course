@@ -1,6 +1,6 @@
 package com.way2java.movieinfoservice.resources;
 
-import com.way2java.movieinfoservice.models.Movie;
+import com.way2java.movieinfoservice.models.MovieInfo;
 import com.way2java.movieinfoservice.models.MovieSummary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +23,11 @@ public class MovieResource {
     }
 
     @GetMapping("/{movieId}")
-    public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
+    public MovieInfo getMovieInfo(@PathVariable("movieId") String movieId) {
         MovieSummary movieSummary =
                 restTemplate.getForObject("https://api.themoviedb.org/3/movie/550" + movieId + "?api_key=" + apiKey, MovieSummary.class);
 
-        return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
+        return new MovieInfo(movieId, movieSummary.getTitle(), movieSummary.getOverview());
     }
 
 }
