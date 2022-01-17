@@ -16,6 +16,7 @@
         <module>movie-catalog-service</module>
         <module>movie-info-service</module>
         <module>ratings-data-service</module>
+        <module>spring-cloud-config-server</module>
     </modules>
 
     <properties>
