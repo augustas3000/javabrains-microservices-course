@@ -1,11 +1,12 @@
 package com.way2java.moviecatalogservice.resources;
 
+import com.way2java.moviecatalogservice.properties.DbProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class GreetingsController {
@@ -25,6 +26,9 @@ public class GreetingsController {
 //    should work but doesnt? investigate
 //    @Value("#{$dbValues}}")
 //    private Map<String, String> dbValues;
+
+    @Autowired
+    private DbProperties dbProperties;
 
     @GetMapping("/greeting")
     public String greeting() {
