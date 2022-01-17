@@ -40,8 +40,8 @@ public class GreetingsController {
         return listValues;
     }
 
-//    @GetMapping("/list-db-values")
-//    public Map<String, String> listOfDbValuesFromProperties() {
-//        return dbValues;
-//    }
+    @GetMapping("/list-db-values")
+    public String listOfDbValuesFromProperties() {
+        return dbProperties.getConnection() + " " + dbProperties.getPort();
+    }
 }

@@ -2,4 +2,5 @@
 2.Provide properties when executing a jar:
     java -jar movie-catalog-service-0.0.1-SNAPSHOT.jar --my.greeting="Hello world from Command line argument"
 3.System properties - also accessible through @Value
-4.
+4. profiles: set when executiog jar with vm option -Dspring.profiles.active=test
+    java -jar movie-catalog-service-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=test
