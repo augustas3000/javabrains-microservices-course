@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: movie-catalog-service
+server:
+  port: 8081
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
+app:
+  name: My app
+my:
+  greeting: Hello
+  app:
+    name: My app
+    description: Welcome to ${app.name}
+  list:
+    values: One,Two,Three
+
+db:
+  connection: "{connectionString: 'http://____', userName: 'foo', password: 'pass'}"
+  host: 127.0.0.1
+  port: 1200

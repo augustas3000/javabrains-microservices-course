@@ -17,7 +17,7 @@ public class GreetingsController {
     @Value("some static message")
     private String staticMessage;
 
-    @Value("${app.description}")
+    @Value("${my.app.description}")
     private String descMessage;
 
     @Value("${my.list.values}")
