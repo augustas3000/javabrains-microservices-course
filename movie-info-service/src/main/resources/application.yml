@@ -1,5 +1,5 @@
 spring:
   application:
-    name: movie-catalog-service
+    name: movie-info-service
   config:
     import: "optional:configserver:http://localhost:8888"

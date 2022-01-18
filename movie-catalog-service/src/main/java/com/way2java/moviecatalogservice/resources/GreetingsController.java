@@ -1,56 +1,25 @@
 package com.way2java.moviecatalogservice.resources;
 
-import com.way2java.moviecatalogservice.properties.DbProperties;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 public class GreetingsController {
 
-    @Value("${my.greeting: default value}")
-    private String greetingMessage;
+    @Value("${test-properties.not-overwritten-by-higher-profiles}")
+    private String commonToAllProfiles;
 
-    @Value("some static message")
-    private String staticMessage;
+    @Value("${test-properties.overwritten-by-higher-profiles}")
+    private String differentIfOverwritten;
 
-    @Value("${my.app.description}")
-    private String descMessage;
+    @Value("${spring.profiles.active: default}")
+    private String activeProfiles;
 
-    @Value("${my.list.values}")
-    private List<String> listValues;
-
-//    should work but doesnt? investigate
-//    @Value("#{$dbValues}}")
-//    private Map<String, String> dbValues;
-
-    @Autowired
-    private DbProperties dbProperties;
-
-//    @Autowired
-//    private Environment environment;
-
-    @GetMapping("/greeting")
-    public String greeting() {
-        return (greetingMessage + " " + staticMessage);
+    @GetMapping("/config-server-results")
+    public String configServerResults() {
+        return "Active profiles are: " + activeProfiles + "\n and common value to all profiles: " + commonToAllProfiles + "\n"
+                + " differentIfOverwrittent: " + differentIfOverwritten;
     }
 
-    @GetMapping("/list-values")
-    public List<String> listOfValuesFromProperties() {
-        return listValues;
-    }
-
-    @GetMapping("/list-db-values")
-    public String listOfDbValuesFromProperties() {
-        return dbProperties.getConnection() + " " + dbProperties.getPort();
-    }
-
-//    @GetMapping("/envdetails")
-//    public String envDetails() {
-//        return environment.getProperty();
-//    }
 }
